@@ -54,7 +54,7 @@ namespace MicroServices.IdentityServer
                     var applicationDbContext=serviceProvider.GetRequiredService<ApplicationDbContext>();
                     applicationDbContext.Database.Migrate();
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                    if (userManager.Users.Any())
+                    if (!userManager.Users.Any())
                     {
                         userManager.CreateAsync(new ApplicationUser
                         {
@@ -63,7 +63,7 @@ namespace MicroServices.IdentityServer
                             City = "Ankara",
                             Country = "Turkiye",
                             NameSurname = "Aleyna Celik"
-                        }, "123456789Aa*");
+                        }, "123456789Aa*").Wait();
                     }
                 }
 
