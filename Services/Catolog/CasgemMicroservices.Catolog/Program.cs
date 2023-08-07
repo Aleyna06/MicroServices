@@ -3,6 +3,7 @@ using CasgemMicroservices.Catolog.Services.CategoryServices;
 using CasgemMicroservices.Catolog.Services.ProductServices;
 using CasgemMicroservices.Catolog.Settings.Abstract;
 using CasgemMicroservices.Catolog.Settings.Concrete;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 
@@ -14,6 +15,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerURL"];
+    opt.Audience = "resource_catolog";
+    opt.RequireHttpsMetadata = false;
+});
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());

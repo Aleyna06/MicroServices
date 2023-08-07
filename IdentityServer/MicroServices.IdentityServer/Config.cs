@@ -57,6 +57,8 @@ namespace MicroServices.IdentityServer
             new Client[]
             {
                 // m2m client credentials flow client
+                //sisteme tam erişimi olamayan kullanıcının kısıtlı erişimiçi ntoken yazdık her bir client her bir kullanıcı demek 
+                //bir kullanıcının sisteme erişim yetkisii Apı Resources de tutuluyo
                 new Client()
                 {
                     ClientName="Casgem1",
